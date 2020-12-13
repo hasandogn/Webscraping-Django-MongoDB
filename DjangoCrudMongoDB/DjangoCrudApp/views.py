@@ -114,7 +114,7 @@ def getInfo(url):
 @csrf_exempt
 def add_post(request):
     url = 'http://193.53.98.38:8310/oauth/token'
-    authInfo = {"username": "ADMIN", "password": "KALEM1453!@" }
+    authInfo = {}
     connectUrl = requests.post(url, data= json.dumps(authInfo), headers = {'Authorization': 'Basic UFJPVklERVI6MTIzNDU2Nzg='})
 
     return print(connectUrl.json())
