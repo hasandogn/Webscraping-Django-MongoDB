@@ -31,11 +31,8 @@ def getCategory():
     categories = soup.find('div', {'class': 'header-menu-bar'}).find('ul', {'class': 'header-menu-bar-list'}).find_all(
         'li', {'class': 'category-list-item category-title'})
 
-    #Domain namede catgory isimlerini cekip her katergori sayfalarini geziyor.
     for item in categories:
-        # Kaategori urli olusturuldu.
         ctgUrl = domainName + item.find('a')['href']
-        # Kateri urlnden veriler cekilmek uzere fonksiyona gitti
         getMaterialInfos(ctgUrl)
         print(materialInfos)
         materialInfos.clear()
@@ -53,7 +50,6 @@ def getMaterialInfos(searchMaterial):
     pagePaginationInfos = soup.find('nav', {'class': 'page-nav'}).find('ul', {'class': 'pagination'}).find_all('li')
 
     sayac = 0
-    # Alinan kategrinin kac sayfa malzemeden olustugu bulunuyor.
     for item in pagePaginationInfos:
         sayac = sayac + 1
         if len(pagePaginationInfos) > sayac:
@@ -69,7 +65,6 @@ def getMaterialInfos(searchMaterial):
 
     sayfaSayisi = 1
     loopValue = True
-    # Sayfa sayilarinin urlleri olusturulup malzeme bilgileri alinmak uzere fonksiyon cagiriliyor
     while loopValue:
         if len(pagesUrls) > 1:
             pageNumbers.append({sayfaSayisi})
@@ -102,7 +97,6 @@ def getInfo(url):
     soup = BeautifulSoup(r.text, 'html.parser')
     generalInfo = soup.find_all('div', {'class': 'product-card product-action'})
 
-    # Html kodlarindan malzeme modelleri olusturuluyor
     for item in generalInfo:
         post = Posts(
             product_name=item.find('h5', {'class': 'title product-card-title'}).find('a', {}).text,
